@@ -7,6 +7,18 @@ if [ -n `which git` ]; then
       git push
     fi
   }
+
+  function gprm() {
+    local startBranch=$(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ \1/')
+    git checkout master
+    if [[ $(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ \1/' | grep "master") == "" ]]; then
+      git checkout$startBranch 
+      echo Failed to find master branch pull aborted
+    else
+    git pull --rebase
+    git checkout$startBranch
+  fi
+  }
   
   alias gp='git push'
   alias gst='git status'

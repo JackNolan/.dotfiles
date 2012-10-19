@@ -1,5 +1,4 @@
 export JAVA_HOME="/System/Library/Frameworks/JavaVM.framework/Home"
-
 source ~/.dotfiles/bin_path.sh
 source ~/.dotfiles/sm.sh
 source ~/.dotfiles/ruby.sh
@@ -21,7 +20,7 @@ export github_username="drnic"
 # source ~/.dotfiles/seinfeld.sh/seinfeld.sh
 
 [[ -s ~/.dotfiles/development_setups.sh ]] && source ~/.dotfiles/development_setups.sh
-
 source ~/.dotfiles/bashprompt.sh
+
 
 # Last
