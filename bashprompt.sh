@@ -2,17 +2,19 @@
 
 function parse_git_status {
   if [[ $(git status 2> /dev/null | grep "Untracked files:") != "" ]]
-   then echo -e "\033[0;33m" #=> yellow
+   then echo -e "\033[0m - \033[0;33m" #=> yellow
   elif [[ $(git status 2> /dev/null | grep "modified:") != "" ]]
-   then echo -e "\033[0;36m" #=> cyan
+   then echo -e "\033[0m - \033[0;36m" #=> cyan
   elif [[ $(git status 2> /dev/null | grep deleted:) != "" ]]
-   then echo -e "\033[0;31m" #=> red
- elif [[ $(git status 2> /dev/null | grep "Not a git repository") != "" ]]
-  echo -e "\033[0;32m" #=> green
+   then echo -e "\033[0m - \033[0;31m" #=> red
+ elif [[ $(git status 2> /dev/null | grep "nothing to commit") != "" ]]; then
+  echo -e "\033[0m - \033[0;32m" #=> green
+else
+  echo ""
   fi
 }
 function parse_git_branch {
-echo $(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/\1/")
+echo $(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/(\1)/")
 }
 
 
@@ -68,7 +70,7 @@ local W="\[\033[0;37m\]"    # white
  local BGC="\[\033[46m\]"
  local BGW="\[\033[47m\]"
 
- export PS1="$G\$(__my_rvm_ruby_version)$NONE- $W\T \$(parse_git_status)(\$(parse_git_branch)) $NONE- $M\W/$NONE\n🃏 "
+ export PS1="$G\$(__my_rvm_ruby_version)$NONE- $W\T\$(parse_git_status)\$(parse_git_branch) $NONE- $M\W/$NONE\n🃏 "
  #export PS1="\[\e]2;\u@\h\a[\[\e[37;44;1m\]\t\[\e[0m\]]$RED\$(parse_git_branch) \[\e[32m\]\W\[\e[0m\]\n♥ "
 
   PS2='> '
