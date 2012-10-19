@@ -8,7 +8,7 @@ function parse_git_status {
   elif [[ $(git status 2> /dev/null | grep deleted:) != "" ]]
    then echo -e "\033[0;31m" #=> red
  else
-  echo "\033[0;32m" #=> green
+  echo -e "\033[0;32m" #=> green
   fi
 }
 function parse_git_branch {
