@@ -2,20 +2,20 @@
 
 function parse_git_status {
   if [[ $(git status 2> /dev/null | grep "Untracked files:") != "" ]]
-   then echo $NONE-$Y
+   then echo -e "\033[0;33m" #=> yellow
   elif [[ $(git status 2> /dev/null | grep "modified:") != "" ]]
-   then echo " $NONE-$C "
+   then echo -e "\033[0;36m" #=> cyan
   elif [[ $(git status 2> /dev/null | grep deleted:) != "" ]]
-   then echo $NONE-$R 
+   then echo -e "\033[0;31m" #=> red
  else
-  echo $NONE-$G
+  echo "\[\033[0;32m\]" #=> green
   fi
 }
 function parse_git_branch {
 echo $(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/ \1/")
 }
 
-
+export PS1="\$(parse_git_status) ####>"
 
 # RVM - disabled
 function __my_rvm_ruby_version {
@@ -27,7 +27,7 @@ function __my_rvm_ruby_version {
   [ "$full" != "" ] && echo "$full "
 }
 
- 
+
 
   UC=$W                 # user's color
   [ $UID -eq "0" ] && UC=$R   # root's color
@@ -68,7 +68,8 @@ local W="\[\033[0;37m\]"    # white
  local BGM="\[\033[45m\]"
  local BGC="\[\033[46m\]"
  local BGW="\[\033[47m\]"
- export PS1="$G\$(__my_rvm_ruby_version)$NONE- $W\T$(parse_git_status)(\$(parse_git_branch)) $NONE- $M\W/$NONE\n🃏 "
+
+ #export PS1="$G\$(__my_rvm_ruby_version)$NONE- $W\T$(parse_git_status)(\$(parse_git_branch)) $NONE- $M\W/$NONE\n🃏 "
  #export PS1="\[\e]2;\u@\h\a[\[\e[37;44;1m\]\t\[\e[0m\]]$RED\$(parse_git_branch) \[\e[32m\]\W\[\e[0m\]\n♥ "
 
   PS2='> '
