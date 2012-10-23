@@ -5,7 +5,9 @@ function parse_git_status {
    then echo -e "\033[0m - \033[0;33m" #=> yellow
   elif [[ $(git status 2> /dev/null | grep "modified:") != "" ]]
    then echo -e "\033[0m - \033[0;36m" #=> cyan
-  elif [[ $(git status 2> /dev/null | grep deleted:) != "" ]]
+  elif [[ $(git status 2> /dev/null | grep "committed:") != "" ]]
+   then echo -e "\033[0m - \033[0;35m" #=> magenta
+  elif [[ $(git status 2> /dev/null | grep "deleted:") != "" ]]
    then echo -e "\033[0m - \033[0;31m" #=> red
  elif [[ $(git status 2> /dev/null | grep "nothing to commit") != "" ]]; then
   echo -e "\033[0m - \033[0;32m" #=> green

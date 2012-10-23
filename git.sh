@@ -19,7 +19,7 @@ if [ -n `which git` ]; then
     git checkout$startBranch
   fi
   }
-  
+
   alias gp='git push'
   alias gst='git status'
   alias gl='git pull'
