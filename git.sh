@@ -1,13 +1,4 @@
 if [ -n `which git` ]; then
-
-  function gpx() {
-    if [ -n $(git config remote.origin.url | grep ssh://reviews) ]; then
-      gerrit push
-    else
-      git push
-    fi
-  }
-
   function gprm() {
     local startBranch=$(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ \1/')
     git checkout master
@@ -36,18 +27,4 @@ if [ -n `which git` ]; then
   alias gpatch='git diff master -p'
   alias gitrm="git status | grep deleted | awk '{print $3}' | xargs git rm"
   alias gitx="open -b nl.frim.GitX"
-
-  function gpall() {
-    for remote in `git remote show`
-    do
-      `git push $remote --all`
-    done
-  }
-
-  alias gpb="git push banana master && hudson build"
-  
-fi
-
-if [[ -n `which hub` ]]; then
-  eval "$(hub alias -s)"
 fi

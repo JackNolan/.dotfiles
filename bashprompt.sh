@@ -29,6 +29,8 @@ function __my_rvm_ruby_version {
   local full="$version$gemset"
   [ "$full" != "" ] && echo "$full "
 }
+# localtemp="$(rvm list | awk 'sub(/=*\* [A-Za-z-]+/,"")' | awk 'sub(/-.*/, "")')"
+
 
 
 

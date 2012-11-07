@@ -15,7 +15,8 @@ source ~/.dotfiles/php.sh
 source ~/.dotfiles/engineyard.sh
 source ~/.dotfiles/cloud_foundry.sh
 source ~/.dotfiles/functions.sh
-
+source ~/.dotfiles/bash_shortcuts.sh
+source ~/.dotfiles/rails_completion.sh
 export github_username="drnic"
 # source ~/.dotfiles/seinfeld.sh/seinfeld.sh
 
