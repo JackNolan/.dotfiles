@@ -5,10 +5,15 @@ if [ -n `which git` ]; then
     if [[ $(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ \1/' | grep "master") == "" ]]; then
       git checkout$startBranch 
       echo Failed to find master branch pull aborted
+    elif [[ $startBranch == " master" ]]; then
+      echo Failed to find master branch pull aborted
     else
-    git pull --rebase
-    git checkout$startBranch
-  fi
+      git pull --rebase
+      git checkout$startBranch
+      # git rebase master
+      # git checkout master
+      # git merge$startBranch
+    fi
   }
 
   alias gp='git push'
